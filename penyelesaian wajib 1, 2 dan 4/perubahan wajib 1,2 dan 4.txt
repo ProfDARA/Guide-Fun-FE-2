@@ -1,0 +1,130 @@
+perubahan pada script.js untuk menerapkan API 
+
+const API_URL = 'https://notes-api.dicoding.dev/v2';
+
+// Fungsi fetch untuk mengambil notes dari API
+const fetchNotes = async () => {
+  try {
+    const response = await fetch(`${API_URL}/notes`);
+    const result = await response.json();
+    if (response.ok) {
+      return result.data;
+    } else {
+      alert('Gagal mengambil notes: ' + result.message);
+      return [];
+    }
+  } catch (error) {
+    alert('Error fetching notes: ' + error);
+    return [];
+  }
+};
+
+// Fungsi fetch untuk menghapus catatan dari API
+const deleteNote = async (id) => {
+  try {
+    const response = await fetch(`${API_URL}/notes/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (response.ok) {
+      alert('Note berhasil dihapus');
+      displayNotes(); // Refresh tampilan catatan setelah penghapusan
+    } else {
+      const result = await response.json();
+      alert('Gagal menghapus note: ' + result.message);
+    }
+  } catch (error) {
+    alert('Error menghapus note: ' + error);
+  }
+};
+
+// Tampilkan catatan di UI
+const displayNotes = async () => {
+  const notesList = document.getElementById('notes-list');
+  notesList.innerHTML = '<p>Loading notes...</p>';
+
+  const notes = await fetchNotes();
+  notesList.innerHTML = '';
+
+  if (notes.length === 0) {
+    notesList.innerHTML = '<p>No notes available</p>';
+  } else {
+    notes.forEach(note => {
+      const noteElement = document.createElement('note-item');
+      noteElement.setAttribute('id', note.id);  // Tambahkan ID catatan
+      noteElement.setAttribute('title', note.title);
+      noteElement.setAttribute('body', note.body);
+      noteElement.setAttribute('createdAt', note.createdAt);
+      noteElement.addEventListener('deleteNote', (event) => {
+        deleteNote(event.detail.id);  // Panggil deleteNote dengan ID
+      });
+      notesList.appendChild(noteElement);
+    });
+  }
+};
+
+// Definisikan custom element NoteItem dengan tombol hapus
+class NoteItem extends HTMLElement {
+  static get observedAttributes() {
+    return ['title', 'body', 'createdAt', 'id'];
+  }
+
+  attributeChangedCallback() {
+    this.render();
+  }
+
+  connectedCallback() {
+    this.render();
+  }
+
+  render() {
+    this.innerHTML = `
+      <div class="note">
+        <h2>${this.getAttribute('title')}</h2>
+        <p>${this.getAttribute('body')}</p>
+        <small>${new Date(this.getAttribute('createdAt')).toLocaleString()}</small>
+        <button class="delete-btn">Hapus</button>
+      </div>
+    `;
+
+    // Event listener untuk tombol hapus
+    this.querySelector('.delete-btn').addEventListener('click', () => {
+      const event = new CustomEvent('deleteNote', {
+        detail: { id: this.getAttribute('id') }
+      });
+      this.dispatchEvent(event);
+    });
+  }
+}
+
+customElements.define('note-item', NoteItem);
+
+// Tambah catatan baru
+document.getElementById('note-form').addEventListener('submit', async (event) => {
+  event.preventDefault();
+  const title = document.getElementById('title').value;
+  const body = document.getElementById('body').value;
+
+  try {
+    const response = await fetch(`${API_URL}/notes`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title, body }),
+    });
+    const result = await response.json();
+    if (response.ok) {
+      displayNotes();
+      document.getElementById('note-form').reset();
+    } else {
+      alert('Gagal menambah note: ' + result.message);
+    }
+  } catch (error) {
+    alert('Error menambah note: ' + error);
+  }
+});
+
+// Tampilkan catatan saat halaman dimuat
+document.addEventListener('DOMContentLoaded', displayNotes);

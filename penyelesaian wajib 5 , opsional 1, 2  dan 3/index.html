@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notes App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+    <!-- tidak ada tambahan HTML untuk wajib 1, perubahan hanya ada pada JS  -->
+<body>
+
+    <div id="app">
+    <h1>Notes App</h1>
+
+    <!-- formulir (elemen<form>) ini akan berfungsi untuk menambahkan note baru      -->
+    <form id="note-form">
+      <input type="text" id="title" placeholder="Judul Note" required>
+      <textarea id="body" placeholder="Isi Note" required></textarea>
+      <button type="submit">Tambah Note</button>
+    </form>
+
+    <!-- tambahan loading indikator  -->
+    <div id="loading-indicator" style="display: none;">
+      <div class="spinner"></div>
+    </div>
+    
+    <!-- ini adalah bagian isi note -->
+    <h2>All Notes</h2>
+    <div id="notes-list"></div>
+    <!-- tambahan arsip note -->
+    <h2>Archived Notes</h2>
+    <div id="archived-notes-list"></div>
+
+  </div>
+
+    <!-- Modal dialog pop up konfirmasi -->
+    <div id="confirmation-modal" class="modal">
+      <div class="modal-content">
+        <p id="confirmation-message"></p>
+        <button id="confirm-yes">Yes</button>
+        <button id="confirm-no">No</button>
+      </div>
+    </div>
+
+  <script src="notes.js"></script>
+  <script src="script.js"></script>
+
+</body>
+
+</html>

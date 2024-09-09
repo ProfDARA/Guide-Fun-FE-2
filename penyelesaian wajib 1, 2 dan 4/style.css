@@ -1,0 +1,136 @@
+
+/* kode lama
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+  }
+*/
+
+/* kode baru */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  }
+
+  /* kode lama 
+  #app {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    width: 90%;
+    max-width: 600px;
+  }
+  */
+
+  /* kode baru */
+  #app {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 800px;
+  }
+  /* kode lama
+  .note {
+    background: #e0e0e0;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 8px;
+  }
+  */
+
+  /*kode baru */
+  .note {
+    background: #ffffffbd;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .note h2 {
+    margin: 0 0 5px;
+  }
+  
+  .note p {
+    margin: 0 0 10px;
+  }
+  
+  .note small {
+    color: #888;
+  }
+
+/* tambahan CSS */
+#note-form {
+  margin-bottom: 20px;
+}
+
+#note-form input,
+#note-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* kode lama
+#note-form button {
+  padding: 10px 20px;
+  border: none;
+  background: #007BFF;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+*/
+
+/* kode baru */
+#note-form button {
+  padding: 10px 20px;
+  background: #007BFF;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#note-form button:hover {
+  background: #0056b3;
+}
+
+/* tambahan CSS untuk grid */	
+#notes-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+.note {
+  background: #e0e0e0;
+  padding: 10px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* tambahan supaya adaptif menggunakan mobile */
+@media (max-width: 600px) {
+  #notes-list {
+    grid-template-columns: 1fr;
+  }
+}
