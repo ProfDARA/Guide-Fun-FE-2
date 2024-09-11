@@ -1,0 +1,21 @@
+pertama buka terminal dan install prettier
+
+1. npm install --save-dev --save-exact prettier
+2. node --eval "fs.writeFileSync('.prettierrc','{}\n')"
+3. node --eval "fs.writeFileSync('.prettierignore','# Ignore artifacts:\nbuild\ncoverage\n')"
+
+opsional pada file.pretierrc dimasukan konfigurasiseperti ES5 ini, bisa disesuaikan dengan selera masing masing
+tapi misal dikosongkan juga tidak masalah karena akan disesuaikan otomatis oleh prettier
+{
+  "semi": true,
+  "singleQuote": true,
+  "tabWidth": 2,
+  "trailingComma": "es5"
+}
+
+
+terakhir untuk menerapkan 
+4. npx prettier . --write
+
+dan untuk pengecekan
+5. npx prettier . --check

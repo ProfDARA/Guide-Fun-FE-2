@@ -1,0 +1,29 @@
+1. buat folder SRC dan masukan semua source code ke sana
+
+2. file yang wajib ada adalah
+
+a. package.json
+package.json adalah file konfigurasi untuk proyek Node.js. File ini mendeskripsikan proyek dan berisi berbagai informasi penting, seperti:
+
+b. webpack.common.js
+webpack.common.js adalah file konfigurasi Webpack yang biasanya digunakan untuk mendefinisikan konfigurasi umum yang berlaku untuk semua environment (baik pengembangan maupun produksi). Beberapa hal yang biasanya diatur di sini termasuk:
+Entry point: File utama yang digunakan sebagai titik masuk aplikasi.
+Output: Di mana hasil build disimpan.
+Rules untuk bagaimana menangani file (misalnya file JavaScript, gambar, CSS).
+Plugins: Menggunakan plugin untuk menambah fitur tertentu dalam proses build, seperti membersihkan folder output, mengoptimalkan gambar, dll.
+Kegunaan utamanya:
+
+
+c. webpack.prod.js
+webpack.prod.js adalah konfigurasi Webpack yang khusus digunakan saat membangun aplikasi untuk produksi. Biasanya, file ini berisi optimasi-optimasi yang diperlukan untuk menghasilkan file yang lebih kecil dan cepat, seperti:
+
+cara instalasi buka terminal vscode, terminal > new terminal dan ketik : NPM install
+
+kemudian load CSS di script.js ditambah import css supaya CSS masuk ke dalam bundle dan di load oleh index.html
+import './style.css';
+
+setelah selesai, tinggal ketik NPM run build
+file akan ada di folder dist yang bisa langsung dibuka index.html nya 
+
+untuk pengecekan program menggunakan server lokal bisa menggunakan 
+NPM run start-dev
